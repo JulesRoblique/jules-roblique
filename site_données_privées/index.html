@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scandales sur la vie privée — Tous concernés</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/reset.css">
+</head>
+<body>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="section hero blue" id="accueil">
+      <h1>SCANDALES SUR LA VIE PRIVÉE</h1>
+      <p>Notre vie est-elle décidée par des algorithmes&nbsp;?</p>
+      <a href="#promesse" class="btn btn-primary">Explorer la vérité</a>
+    </section>
+
+    <!-- PROMESSE -->
+    <section class="section blue" id="promesse">
+      <p>Liberté, ouverture, égalité d’accès… c’était la promesse.</p>
+
+      <div class="texte-supplementaire">
+        <p>- L’ère numérique promettait des plateformes qui connectent les individus, donnent la parole, élargissent les opportunités d’expression et créent des communautés globales.</p>
+        <p>- L’idée que l’utilisateur aurait le contrôle de ses données et de sa vie privée, tout en bénéficiant des bénéfices de l’interconnectivité.</p>
+      </div>
+
+      <a class="btn btn-primary" href="#refus">Du rêve au réel</a>
+    </section>
+
+    <!-- REFUS -->
+    <section class="section blue" id="refus">
+      <p>Crédit refusé — logement refusé — emploi refusé</p>
+
+      <div class="badges-vertical">
+        <button class="slide-btn" data-target="apple">Apple Card</button>
+        <button class="slide-btn" data-target="ikea">IKEA</button>
+        <button class="slide-btn" data-target="tiktok">TikTok</button>
+        <button class="slide-btn" data-target="firstvap">FirstVap</button>
+      </div>
+
+      <a class="btn btn-primary" href="#mecanisme">Comment ça marche&nbsp;?</a>
+    </section>
+
+    <!-- SLIDES -->
+    <section class="slide blue" id="slide-apple">
+      <h2>Apple Card</h2>
+      <a class="btn btn-primary retour-btn">Retour</a>
+    </section>
+
+    <section class="slide blue" id="slide-ikea">
+      <h2>IKEA</h2>
+      <a class="btn btn-primary retour-btn">Retour</a>
+    </section>
+
+    <section class="slide blue" id="slide-tiktok">
+      <h2>TikTok</h2>
+      <a class="btn btn-primary retour-btn">Retour</a>
+    </section>
+
+    <section class="slide blue" id="slide-firstvap">
+      <h2>FirstVap</h2>
+      <a class="btn btn-primary retour-btn">Retour</a>
+    </section>
+
+    <!-- MÉCANISME -->
+    <section class="section blue" id="mecanisme">
+      <h2>Comment ça marche&nbsp;?</h2>
+      <ul class="steps">
+        <li>1️⃣ Collecte de données</li>
+        <li>2️⃣ Profilage & catégorisation</li>
+        <li>3️⃣ Décision automatique</li>
+        <li>4️⃣ Observation et suivi</li>
+      </ul>
+      <a class="btn btn-primary" href="#resister">Reprendre le contrôle</a>
+    </section>
+
+    <!-- RÉSISTER -->
+    <section class="section black" id="resister">
+      <h2>Supprimer, c’est déjà résister</h2>
+      <p>La sobriété numérique est une nécessité.</p>
+      <a class="btn btn-primary" href="#ettoi">Découvrir comment reprendre le contrôle</a>
+    </section>
+
+    <!-- ET TOI -->
+    <section class="section black" id="ettoi">
+      <h2>Et toi, si tu étais observé maintant&nbsp;?</h2>
+      <video id="video-fond" class="video-fond" src="assets/video/Séquence 01.mp4" playsinline muted></video>
+    </section>
+
+  </main>
+
+  <!-- NAVIGATION BASSE -->
+  <nav class="bottom-nav">
+    <a href="#accueil">Accueil</a>
+    <a href="#promesse">Promesse</a>
+    <a href="#refus">Réalité</a>
+    <a href="#mecanisme">Mécanisme</a>
+    <a href="#resister">Résister</a>
+  </nav>
+
+  <!-- 🎬 SCRIPT GESTION DES SLIDES ET VIDÉO -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const video = document.getElementById("video-fond");
+      const boutonResister = document.querySelector("#resister .btn");
+      const slides = document.querySelectorAll(".slide");
+      const buttons = document.querySelectorAll(".slide-btn");
+      const retourBtns = document.querySelectorAll(".retour-btn");
+
+      let timer;
+
+      // 🎬 Lancer la vidéo après 1 seconde
+      const lancerVideo = () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          video.currentTime = 0;
+          video.classList.add("active");
+          video.play();
+          video.onended = () => {
+            video.classList.remove("active");
+          };
+        }, 1000);
+      };
+
+      // Clic sur le bouton de la section "Résister"
+      boutonResister?.addEventListener("click", lancerVideo);
+
+      // 🎞 Gestion des slides
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.target;
+          const slide = document.getElementById(`slide-${target}`);
+          slide.classList.add("active");
+          document.body.classList.add("no-scroll");
+        });
+      });
+
+      retourBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          slides.forEach(s => s.classList.remove("active", "from-left", "from-right"));
+          document.body.classList.remove("no-scroll");
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
