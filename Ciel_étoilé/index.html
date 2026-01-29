@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Twinkling Night Sky</title>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets\css\styles.css">
+    </head>
+    <body>
+        <div class="moon">
+            <svg viewBox="0 0 180 180" width="180" height="180">
+                <circle cx="90" cy="90" r="90" />
+            </svg>
+        </div>
+        <div class="snows"></div>
+       
+        <div class="cloud-wrapper">
+            <div class="clouds">
+                <img src="assets\img\clouds.png">
+                <img id="cloud2" src="assets\img\clouds.png">
+            </div>
+        </div>
+        
+        <script>
+            const snowContainer = document.querySelector('.snows');
+
+            // crée 200 étoiles pour augmenter leur quantité
+            for (let i = 0; i < 200; i++) {
+                const snow = document.createElement('div');
+                snow.classList.add('snow');
+                snow.style.width = `${Math.floor(Math.random() * 10) + 1}px`; // Taille accrue des étoiles
+                snow.style.height = snow.style.width;
+
+                // Choisir aléatoirement haut ou gauche
+                const fromTop = Math.random() < 0.5;
+                if (fromTop) {
+                snow.style.top = `0vh`;
+                snow.style.left = `${Math.random() *100}vw`;
+                } else {
+                snow.style.top = `${Math.random() *100}vh`;
+                snow.style.left = `0vw`;
+                }
+                snow.style.animationDuration = `${Math.random() * 2 + 3}s`; // Durée d'animation plus lente
+                snow.style.animationDelay = `${Math.random() * 3}s, ${Math.random() * 5}s`; // Délai variable
+
+                // Ajoute l'étoile à l'écran
+                snowContainer.appendChild(snow);
+            }
+        </script>
+    </body>
+</html>
